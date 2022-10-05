@@ -38,3 +38,11 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -v
+    - name: Test Reporter
+      uses: dorny/test-reporter@v1.5.0
+      if: success() || failure()    # run this step even if previous step failed
+      with:
+          name: Pytest            # Name of the check run which will be created
+          path: reports/    # Path to test results
+          reporter: pytest-html-reporter        # Format of test results
+
